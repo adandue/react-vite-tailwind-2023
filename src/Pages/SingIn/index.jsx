@@ -1,12 +1,14 @@
-function SingIn() {
+import { Layout } from "../../Components/Layout"
 
-    return (
+const SingIn = () => {
+return (
     <>
-        <div className='bg-red-100'>
-        Sign In
-        </div>
+        <Layout>
+        Sing In
+        </Layout>
+        
     </>
     )
 }
 
-export default SingIn
+export { SingIn }

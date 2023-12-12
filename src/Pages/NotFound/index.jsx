@@ -1,12 +1,14 @@
-function NotFound() {
+import { Layout } from "../../Components/Layout"
 
-    return (
+const NotFound = () => {
+return (
     <>
-        <div className='bg-red-100'>
+        <Layout>
         Not Found
-        </div>
+        </Layout>
+        
     </>
     )
 }
 
-export default NotFound
+export { NotFound }
