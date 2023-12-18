@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { Layout } from "../../Components/Layout"
 import { Card } from "../../Components/Card"
+import { ProductDetail } from "../../Components/ProductDetail"
 import { apiUrl } from "../../api"
 
 const Home = () => {
@@ -33,6 +34,7 @@ return (
             )
         }
         </div>
+        <ProductDetail />
         </Layout>
         
     </>
