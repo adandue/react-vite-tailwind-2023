@@ -8,7 +8,7 @@ const ProductDetail = () => {
     // console.log('PRODUCT TO SHOW: ', context.productToShow)
     return(
         <aside 
-        className={`${context.isProductDetailOpen ? 'flex' : 'hidden'} product-detail flex-col fixed right-0 border bg-white border-black rounded-lg`}>
+        className={`${context.isProductDetailOpen ? 'flex' : 'hidden'} product-detail scrollable-cards flex-col fixed right-0 border bg-white border-black rounded-lg`}>
         <div className='flex justify-between items-center p-6'>
             <h2 className='font-medium text-xl'>Detail</h2>
             <div>
