@@ -1,4 +1,5 @@
-import { createContext, useState } from 'react';
+import { useEffect, createContext, useState } from 'react';
+import { apiUrl } from "../api"
 
 export const ShoppingCartContext = createContext ();
 
@@ -27,6 +28,25 @@ export const ShoppingCartProvider = ({children}) => {
     //Shopping Cart order
     const [order, setOrder] = useState([]);
 
+    // Get Products
+    const [items, setItems] = useState(null);
+
+    //Search products by title
+    const [searchByTitle, setSearchByTitle] = useState(null);
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`${apiUrl}/products`)
+                const data = await response.json()
+                setItems(data)
+            } catch (error) {
+                console.error(`Ocurrió un error: ${error}`);
+            }
+        }
+        fetchData();
+    }, []);
+
     return(
         <ShoppingCartContext.Provider value={{
             count,
@@ -42,7 +62,11 @@ export const ShoppingCartProvider = ({children}) => {
             openCheckoutSideMenu,
             closeCheckoutSideMenu,
             order,
-            setOrder
+            setOrder,
+            items,
+            setItems,
+            searchByTitle,
+            setSearchByTitle
         }}>
             {children}
         </ShoppingCartContext.Provider>
