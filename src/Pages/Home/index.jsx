@@ -7,13 +7,34 @@ import { ShoppingCartContext } from "../../Context"
 const Home = () => {
 const context = useContext(ShoppingCartContext)
 const items = context.items
+const renderView = () => {
+    if (context.searchByTitle?.length > 0) {
+        if (context.filteredItems?.length > 0) {
+            return (
+                context.filteredItems?.map(item => (
+                    <Card key= {item.id} data = {item} />
+                ))
+            )
+        } else {
+            return (
+                <div>We don't have anything</div>
+            )
+        }
+    } else {
+        return (
+            items?.map(item => (
+                <Card key= {item.id} data = {item} />
+            ))
+        )
+    }
+}
 
 
 return (
     <>
         <Layout>
-        <div className="flex items-center w-80 relative justify-center mb-6 text-2xl">
-            <h1>Exclusive Products</h1>
+        <div className="flex items-center w-80 relative justify-center mb-6">
+            <h1 className='font-medium text-xl'>Exclusive Products</h1>
         </div>
         <input 
             type='text' 
@@ -22,22 +43,12 @@ return (
             onChange={(event) => {
                 context.setSearchByTitle(event.target.value)
             }}
-            
             />
         <div className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
-        {
-            items?.map((item) => (
-            <Card 
-            key={item.id}
-            data={item}
-            />
-            )
-            )
-        }
+            {renderView()}
         </div>
         <ProductDetail />
         </Layout>
-        
     </>
     )
 }
