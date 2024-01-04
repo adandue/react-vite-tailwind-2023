@@ -63,31 +63,39 @@ export const ShoppingCartProvider = ({children}) => {
     }
     //function for search by Category
     const filteredItemsByCategory = (items, searchByCategory) => {
-        return items?.filter(item => item.category.toLowerCase().includes(searchByCategory.toLowerCase()))
+        const result = items.filter(item => item.category.includes(searchByCategory));
+        // console.log(result)
+        return (
+            result
+            )
+        
     }
 
-    const filterBy = (searchType, items, searchByTitle, searchByCategory)=> {
-        if(searchType === 'BY_TITLE') {
-            return filteredItemsByTitle(items, searchByTitle)
+    const filterBy = (searchType, items, searchByTitle, searchByCategory) => {
+        if (searchType === 'BY_TITLE') {
+        return filteredItemsByTitle(items, searchByTitle)
         }
-        if(searchType === 'BY_CATEGORY') {
-            return filteredItemsByCategory(items, searchByCategory)
-        }
-        if(searchType === 'BY_TITLE_AND_CATEGORY') {
-            return filteredItemsByCategory(items, searchByCategory).filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
-        }
-        if(!searchType) {
-            return items
-        }
-    }
-
-    useEffect(() => {
-        if (searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_TITLE_AND_CATEGORY',items, searchByTitle, searchByCategory))
-        if (searchByTitle && !searchByCategory) setFilteredItems(filterBy('BY_TITLE',items, searchByTitle, searchByCategory))
-        if (!searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_CATEGORY',items, searchByTitle, searchByCategory))
-        if (!searchByTitle && !searchByCategory) setFilteredItems(filterBy(null,items, searchByTitle, searchByCategory))
     
-    }, [items, searchByTitle, searchByCategory]);
+        if (searchType === 'BY_CATEGORY') {
+            // console.log(searchByCategory)
+        return filteredItemsByCategory(items, searchByCategory)
+        }
+    
+        if (searchType === 'BY_TITLE_AND_CATEGORY') {
+        return filteredItemsByCategory(items, searchByCategory).filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+        }
+    
+        if (!searchType) {
+        return items
+        }
+    }
+    
+    useEffect(() => {
+        if (searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_TITLE_AND_CATEGORY', items, searchByTitle, searchByCategory))
+        if (searchByTitle && !searchByCategory) setFilteredItems(filterBy('BY_TITLE', items, searchByTitle, searchByCategory))
+        if (!searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_CATEGORY', items, searchByTitle, searchByCategory))
+        if (!searchByTitle && !searchByCategory) setFilteredItems(filterBy(null, items, searchByTitle, searchByCategory))
+    }, [items, searchByTitle, searchByCategory])
 
     //functions for search by Category
 
