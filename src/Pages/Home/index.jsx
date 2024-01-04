@@ -6,28 +6,20 @@ import { ShoppingCartContext } from "../../Context"
 
 const Home = () => {
 const context = useContext(ShoppingCartContext)
-const items = context.items
 const renderView = () => {
-    if (context.searchByTitle?.length > 0) {
-        if (context.filteredItems?.length > 0) {
-            return (
-                context.filteredItems?.map(item => (
-                    <Card key= {item.id} data = {item} />
-                ))
-            )
-        } else {
-            return (
-                <div>No results found</div>
-            )
-        }
+    if (context.filteredItems?.length > 0) {
+        return (
+        context.filteredItems?.map(item => (
+            <Card key={item.id} data={item} />
+        ))
+        )
     } else {
         return (
-            items?.map(item => (
-                <Card key= {item.id} data = {item} />
-            ))
+        <div>No results found</div>
         )
     }
-}
+    }
+
 
 
 return (

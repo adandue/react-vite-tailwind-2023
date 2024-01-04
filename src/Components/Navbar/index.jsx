@@ -7,7 +7,7 @@ const Navbar = () => {
     const context = useContext(ShoppingCartContext)
     const activeStyle = 'underline underline-offset-4'
     return (
-        <nav className='flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light bg-white'>
+        <nav className='flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light bg-black text-white'>
             <ul className='flex items-center gap-3'>
                 <li className='font-semibold text-lg'>
                     <NavLink
@@ -107,9 +107,9 @@ const Navbar = () => {
                     </NavLink>
                 </li>
                 <li className='flex items-center'>
-                    <ShoppingBagIcon className='h-6 w-6 text-gray-600' /> 
+                    <ShoppingBagIcon className='h-6 w-6 text-white' /> 
                     <div>
-                    {context.count}
+                    {context.cartProducts.length}
                     </div>
                 </li>
             </ul>
