@@ -17,7 +17,7 @@ const renderView = () => {
             )
         } else {
             return (
-                <div>We don't have anything</div>
+                <div>No results found</div>
             )
         }
     } else {
