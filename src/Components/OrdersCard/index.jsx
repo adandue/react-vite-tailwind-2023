@@ -11,7 +11,7 @@ return (
                 <span className='font-light'>{totalProducts} articules</span>
             </p>
             <p className='flex items-center gap-2'>
-                <span className='font-medium text-2xl'>${totalPrice}</span>
+                <span className='font-medium text-2xl'>${totalPrice.toFixed(2)}</span>
                 <ChevronRightIcon className='h-6 w-6 text-black cursor-pointer' />
             </p>
         </div>
