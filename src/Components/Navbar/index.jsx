@@ -11,6 +11,13 @@ const Navbar = () => {
     const signOut = localStorage.getItem('sign-out')
     const parsedSignOut = JSON.parse(signOut)
     const isUserSignOut = context.signOut || parsedSignOut
+    //Account
+    const account = localStorage.getItem('account')
+    const parsedAccount = JSON.parse(account)
+    //Has an account
+    const noAccountInLocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0 : true
+    const noAccountInLocalState = context.account ? Object.keys(context.account).length === 0 : true
+    const hasUserAnAccount = !noAccountInLocalState || noAccountInLocalStorage
 
     const handleSignOut = () => {
         const stringifiedSignOut = JSON.stringify(true)
@@ -19,19 +26,7 @@ const Navbar = () => {
     }
 
     const renderView = () => {
-        if (isUserSignOut) {
-            return (
-                <li>
-                    <NavLink
-                        to="sign-in"
-                        className={({ isActive }) => isActive ? activeStyle : undefined }
-                        onClick={() => handleSignOut()}
-                    >
-                    Sign Out
-                    </NavLink>
-                </li>
-            )
-        } else {
+        if (hasUserAnAccount && !isUserSignOut) {
             return (
                 <>
                     <li className='text-black/60'>
@@ -70,6 +65,18 @@ const Navbar = () => {
                 </li>
                 </>
             )
+        } else {
+            return (
+                <li>
+                    <NavLink
+                        to="sign-in"
+                        className={({ isActive }) => isActive ? activeStyle : undefined }
+                        onClick={() => handleSignOut()}
+                    >
+                    Sign Out
+                    </NavLink>
+                </li>
+            )
         }
     }
     return (
@@ -77,7 +84,7 @@ const Navbar = () => {
             <ul className='flex items-center gap-3'>
                 <li className='font-semibold text-lg'>
                     <NavLink
-                    to='/'
+                    to={`${isUserSignOut ? '/sign-in' : '/'}`}
                     >
                     Shopi
                     </NavLink>
